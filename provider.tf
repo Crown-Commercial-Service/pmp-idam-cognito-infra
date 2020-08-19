@@ -10,6 +10,6 @@
 # }
 
 provider "aws" {
-  region  = var.region
+  region  = "eu-west-1"
   //profile = var.env["profile"]
 }
