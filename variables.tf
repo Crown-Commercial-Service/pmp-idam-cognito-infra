@@ -21,16 +21,6 @@ variable "env" {
   type    = map
   default = {}
 }
-# data "aws_secretsmanager_secret_version" "creds" {
-#   # Fill in the name you gave to your secret
-#   secret_id = "aws_cred_dev"
-# }
-
-# locals {
-#   db_creds = jsondecode(
-#     data.aws_secretsmanager_secret_version.creds.secret_string
-#   )
-# }
 
 # variable "environment_name" {
 #   default = "Develop"
