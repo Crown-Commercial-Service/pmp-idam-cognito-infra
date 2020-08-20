@@ -120,5 +120,5 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
 ##############################################################
 resource "aws_cognito_user_pool_domain" "ccs_cmp_domain" {
   domain       = data.aws_caller_identity.current.account_id
-  user_pool_id = aws_cognito_user_pool.pmp_user_pool.id
+  user_pool_id = aws_cognito_user_pool.pmp_user_pool.*.id[count.index]
 }
