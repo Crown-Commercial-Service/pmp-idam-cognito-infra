@@ -105,7 +105,7 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
   name                                 = "pmp_client"
   user_pool_id                         = aws_cognito_user_pool.pmp_user_pool.id
   refresh_token_validity               = 30
-  generate_secret                      = true
+  generate_secret                      = false
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH"]
   callback_urls                        = ["https://www.theapsgroup.com/en-gb/"]
