@@ -84,6 +84,31 @@ resource "aws_cognito_user_pool" "pmp_user_pool" {
       max_length = 256
     }
   }
+
+  schema {
+    name                = "phone_number"
+    attribute_data_type = "String"
+    mutable             = true
+    required            = true
+
+    string_attribute_constraints {
+      min_length = 1
+      max_length = 2048
+    }
+  }
+
+  schema {
+    attribute_data_type      = "String"
+    developer_only_attribute = false
+    mutable                  = true
+    name                     = "Organisation"
+    required                 = true
+
+    string_attribute_constraints {
+      min_length = 3
+      max_length = 256
+    }
+  }
 }
 
 ##############################################################
@@ -107,7 +132,7 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
   refresh_token_validity               = 30
   generate_secret                      = false
   allowed_oauth_flows_user_pool_client = true
-  explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH"]
+  explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
   callback_urls                        = ["https://www.theapsgroup.com/en-gb/"]
   allowed_oauth_flows                  = ["code"]
   allowed_oauth_scopes                 = ["email", "openid", "profile", "aws.cognito.signin.user.admin"]
