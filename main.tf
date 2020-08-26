@@ -102,7 +102,7 @@ resource "aws_cognito_user_pool" "pmp_user_pool" {
     developer_only_attribute = false
     mutable                  = true
     name                     = "Organisation"
-    required                 = true
+    required                 = false
 
     string_attribute_constraints {
       min_length = 3
