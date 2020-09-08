@@ -36,9 +36,9 @@ resource "aws_cognito_user_pool" "pmp_user_pool" {
   admin_create_user_config {
     allow_admin_create_user_only = false
     invite_message_template {
-      email_subject = "Crown Marketplace - Your temporary password"
-      email_message = "<p>Welcome to the Crown Marketplace.</p><p>Your username is {username} and temporary password is {####}</p><p><strong>NOTE.</strong>Your username is case-sensitive.</p><p>Access the site at https://cmp.cmpdev.crowncommercial.gov.uk/.</p>"
-      sms_message   = "Welcome to the Crown Marketplace. Your username is {username} and temporary password is {####}"
+      email_subject = "Print Marketplace - Your temporary password"
+      email_message = "<p>Welcome to the Print Marketplace.</p><p>Your username is {username} and temporary password is {####}</p><p><strong>NOTE.</strong>Your username is case-sensitive.</p><p>Access the site at add-website-url.</p>"
+      sms_message   = "Welcome to the Print Marketplace. Your username is {username} and temporary password is {####}"
     }
   }
 
@@ -130,7 +130,7 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
   name                                 = "pmp_client"
   user_pool_id                         = aws_cognito_user_pool.pmp_user_pool.id
   refresh_token_validity               = 30
-  generate_secret                      = false
+  generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
   callback_urls                        = ["https://www.theapsgroup.com/en-gb/"]
