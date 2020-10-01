@@ -22,6 +22,16 @@ variable "env" {
   default = {}
 }
 
+# ------------------------------------------------------------------------------
+# OPTIONAL PARAMETERS
+# These variables have defaults, but may be overridden.
+# ------------------------------------------------------------------------------
+
+variable "user_pool_name" {
+  type        = string
+  description = "The name of the Cognito User Pool."
+  default     = "pmp_user_pool"
+}
 # variable "environment_name" {
 #   default = "Develop"
 # }

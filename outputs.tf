@@ -39,15 +39,15 @@ output "domain_app_version" {
 #
 # aws_cognito_user_pool_client
 #
-output "client_ids" {
-  description = "The ids of the user pool clients"
-  value       = aws_cognito_user_pool_client.pmp_client.*.id
-}
+# output "client_ids" {
+#   description = "The ids of the user pool clients"
+#   value       = aws_cognito_user_pool_client.pmp_client.*.id
+# }
 
-output "client_secrets" {
-  description = " The client secrets of the user pool clients"
-  value       = aws_cognito_user_pool_client.pmp_client.*.client_secret
-}
+# output "client_secrets" {
+#   description = " The client secrets of the user pool clients"
+#   value       = aws_cognito_user_pool_client.pmp_client.*.client_secret
+# }
 
 # #
 # # aws_cognito_resource_servers
