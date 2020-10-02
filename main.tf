@@ -22,7 +22,7 @@
 # Basic user pool using email verification. THe user name
 # must be an email address.
 ##############################################################
-resource "aws_cognito_user_pool" "user_pool" {
+resource "aws_cognito_user_pool" "pmp_user_pool" {
   name = var.user_pool_name
 
   # We allow the public to create user profiles
