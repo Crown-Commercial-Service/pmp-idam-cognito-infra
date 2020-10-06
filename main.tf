@@ -138,7 +138,7 @@ resource "aws_cognito_user_pool_client" "pmp_client_dev" {
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
   callback_urls                        = ["https://auth-dev.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
-  allowed_oauth_scopes                 = ["email", "openid", "profile", "aws.cognito.signin.user.admin"]
+  allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
 }
 
@@ -154,7 +154,7 @@ resource "aws_cognito_user_pool_client" "pmp_client_test" {
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
   callback_urls                        = ["https://auth-test.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
-  allowed_oauth_scopes                 = ["email", "openid", "profile", "aws.cognito.signin.user.admin"]
+  allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
 }
 
@@ -170,7 +170,7 @@ resource "aws_cognito_user_pool_client" "pmp_client_prod" {
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
   callback_urls                        = ["https://auth-prod.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
-  allowed_oauth_scopes                 = ["email", "openid", "profile", "aws.cognito.signin.user.admin"]
+  allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
 }
 ##############################################################
@@ -185,7 +185,7 @@ resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
   callback_urls                        = ["https://auth-dev.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
-  allowed_oauth_scopes                 = ["email", "openid", "profile", "aws.cognito.signin.user.admin"]
+  allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
 }
 
