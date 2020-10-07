@@ -26,4 +26,3 @@ terraform {
   #   dynamodb_table = "pmp_terraform_state_lock-${var.environment}"
   #   encrypt        = true
   # }
-}
