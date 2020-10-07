@@ -17,7 +17,7 @@ jobs:
       uses: hashicorp/setup-terraform@v1.0.1
 
     - name: Terraform Init
-      run: terraform init
+      run: terraform init -var 'environment=develop'
       env:
         GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: '.'
