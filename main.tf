@@ -175,7 +175,7 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
 ##############################################################
 # create user pool app client CCS
 ##############################################################
-resource "aws_cognito_user_pool_client" "pmp_client" {
+resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   name                                 = "pmp_client_ccs-${var.environment}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
   refresh_token_validity               = 1
