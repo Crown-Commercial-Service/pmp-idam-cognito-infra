@@ -125,18 +125,17 @@ resource "aws_cognito_user_group" "pmp_user_pool_groups" {
   user_pool_id = aws_cognito_user_pool.user_pool.id
 }
 
-
 ##############################################################
 # create user pool app client
 ##############################################################
-resource "aws_cognito_user_pool_client" "pmp_client_dev" {
-  name                                 = "pmp_client_dev"
+resource "aws_cognito_user_pool_client" "pmp_client" {
+  name                                 = "pmp_client-${var.env_var}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
   refresh_token_validity               = 1
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth-dev.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+  callback_urls                        = ["https://auth-${var.env_var}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
@@ -145,45 +144,45 @@ resource "aws_cognito_user_pool_client" "pmp_client_dev" {
 ##############################################################
 # create user pool app client
 ##############################################################
-resource "aws_cognito_user_pool_client" "pmp_client_test" {
-  name                                 = "pmp_client_test"
-  user_pool_id                         = aws_cognito_user_pool.user_pool.id
-  refresh_token_validity               = 1
-  generate_secret                      = true
-  allowed_oauth_flows_user_pool_client = true
-  explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth-test.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
-  allowed_oauth_flows                  = ["code", "implicit"]
-  allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
-  supported_identity_providers         = ["COGNITO"]
-}
+# resource "aws_cognito_user_pool_client" "pmp_client_test" {
+#   name                                 = "pmp_client_test"
+#   user_pool_id                         = aws_cognito_user_pool.user_pool.id
+#   refresh_token_validity               = 1
+#   generate_secret                      = true
+#   allowed_oauth_flows_user_pool_client = true
+#   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
+#   callback_urls                        = ["https://auth-test.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+#   allowed_oauth_flows                  = ["code", "implicit"]
+#   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
+#   supported_identity_providers         = ["COGNITO"]
+# }
 
-##############################################################
-# create user pool app client
-##############################################################
-resource "aws_cognito_user_pool_client" "pmp_client_prod" {
-  name                                 = "pmp_client_prod"
-  user_pool_id                         = aws_cognito_user_pool.user_pool.id
-  refresh_token_validity               = 1
-  generate_secret                      = true
-  allowed_oauth_flows_user_pool_client = true
-  explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth-prod.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
-  allowed_oauth_flows                  = ["code", "implicit"]
-  allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
-  supported_identity_providers         = ["COGNITO"]
-}
+# ##############################################################
+# # create user pool app client
+# ##############################################################
+# resource "aws_cognito_user_pool_client" "pmp_client_prod" {
+#   name                                 = "pmp_client_prod"
+#   user_pool_id                         = aws_cognito_user_pool.user_pool.id
+#   refresh_token_validity               = 1
+#   generate_secret                      = true
+#   allowed_oauth_flows_user_pool_client = true
+#   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
+#   callback_urls                        = ["https://auth-prod.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+#   allowed_oauth_flows                  = ["code", "implicit"]
+#   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
+#   supported_identity_providers         = ["COGNITO"]
+# }
 ##############################################################
 # create user pool app client CCS
 ##############################################################
 resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
-  name                                 = "pmp_client_ccs"
+  name                                 = "pmp_client_ccs-${var.env_var}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
   refresh_token_validity               = 1
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth-dev.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+  callback_urls                        = ["https://auth-${var.env_var}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
@@ -192,7 +191,7 @@ resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
 ##############################################################
 # Domain using the current AWS account ID
 ##############################################################
-resource "aws_cognito_user_pool_domain" "ccs_cmp_domain" {
-  domain       = data.aws_caller_identity.current.account_id
-  user_pool_id = aws_cognito_user_pool.user_pool.id
-}
+# resource "aws_cognito_user_pool_domain" "ccs_cmp_domain" {
+#   domain       = data.aws_caller_identity.current.account_id
+#   user_pool_id = aws_cognito_user_pool.user_pool.id
+# }
