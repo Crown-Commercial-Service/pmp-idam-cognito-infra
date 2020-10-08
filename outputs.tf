@@ -52,7 +52,3 @@ output "last_modified_date" {
 # #
 # # aws_cognito_resource_servers
 # #
-# output "resource_servers_scope_identifiers" {
-#   description = " A list of all scopes configured in the format identifier/scope_name"
-#   value       = aws_cognito_resource_server.resource.*.scope_identifiers
-# }
