@@ -19,7 +19,6 @@ output "aws_account_id" {
 
 variable "env_var" {
   type    = string
-  default = ""
 }
 
 variable "env" {
