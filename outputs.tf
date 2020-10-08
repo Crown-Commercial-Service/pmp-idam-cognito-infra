@@ -26,15 +26,15 @@ output "last_modified_date" {
 #
 # aws_cognito_user_pool_domain
 #
-output "domain_aws_account_id" {
-  description = "The AWS account ID for the user pool owner"
-  value       = join("", aws_cognito_user_pool_domain.ccs_cmp_domain.*.aws_account_id)
-}
+# output "domain_aws_account_id" {
+#   description = "The AWS account ID for the user pool owner"
+#   value       = join("", aws_cognito_user_pool_domain.ccs_cmp_domain.*.aws_account_id)
+# }
 
-output "domain_app_version" {
-  description = "The app version"
-  value       = join("", aws_cognito_user_pool_domain.ccs_cmp_domain.*.version)
-}
+# output "domain_app_version" {
+#   description = "The app version"
+#   value       = join("", aws_cognito_user_pool_domain.ccs_cmp_domain.*.version)
+# }
 
 #
 # aws_cognito_user_pool_client
@@ -52,7 +52,3 @@ output "domain_app_version" {
 # #
 # # aws_cognito_resource_servers
 # #
-# output "resource_servers_scope_identifiers" {
-#   description = " A list of all scopes configured in the format identifier/scope_name"
-#   value       = aws_cognito_resource_server.resource.*.scope_identifiers
-# }
