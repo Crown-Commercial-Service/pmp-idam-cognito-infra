@@ -21,7 +21,7 @@ jobs:
       run: terraform init -backend-config="bucket=pmp-terraform-state-develop" 
       -backend-config="key=ccs-pmp-infra-idam"
       -backend-config="region=eu-west-2"
-      -backend-config="dynamodb_table=pmp_terraform_state_lock-develop
+      -backend-config="dynamodb_table=pmp_terraform_state_lock-develop"
       -backend-config="encrypt=true"
       env:
         GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
