@@ -37,7 +37,7 @@ jobs:
       run: terraform validate
 
     - name: Terraform Plan
-      run: terraform plan -var 'environment=develop'
+      run: terraform plan -var 'env_var=develop'
       env:
         GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: '.'
