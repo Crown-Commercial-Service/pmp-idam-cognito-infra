@@ -18,7 +18,7 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       
     - name: Terraform Init
-      rrun: terraform init 
+      run: terraform init 
           -backend-config="bucket=pmp-terraform-state-develop" 
           -backend-config="key=ccs-pmp-infra-idam" 
           -backend-config="region=eu-west-2" 
