@@ -26,3 +26,4 @@ config {
   dynamodb_table = "${var.dynamodb_table}"
   encrypt        = "${var.encrypt}"
 }
+}
