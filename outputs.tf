@@ -25,20 +25,6 @@ output "last_modified_date" {
   description = "The date the user pool was last modified"
   value       = aws_cognito_user_pool.user_pool.last_modified_date
 }
-
-#
-# aws_cognito_user_pool_domain
-#
-# output "domain_aws_account_id" {
-#   description = "The AWS account ID for the user pool owner"
-#   value       = join("", aws_cognito_user_pool_domain.ccs_cmp_domain.*.aws_account_id)
-# }
-
-# output "domain_app_version" {
-#   description = "The app version"
-#   value       = join("", aws_cognito_user_pool_domain.ccs_cmp_domain.*.version)
-# }
-
 #
 # aws_cognito_user_pool_client
 #
