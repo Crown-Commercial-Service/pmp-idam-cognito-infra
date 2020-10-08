@@ -6,7 +6,7 @@ terraform {
   }
 
 
-  backend "s3" {}
+  # backend "s3" {}
 
   # backend "s3" {
   #   bucket         = "pmp-terraform-state-${environment}"
@@ -15,15 +15,4 @@ terraform {
   #   dynamodb_table = "pmp_terraform_state_lock-${environment}"
   #   encrypt        = true
   # }
-}
-
-data "terraform_remote_state" "state" {
-backend = "s3"
-config {
- bucket         = "${var.bucket}"
-  key            = "${var.key}"
-  region         = "${var.region}"
-  dynamodb_table = "${var.dynamodb_table}"
-  encrypt        = "${var.encrypt}"
-}
 }
