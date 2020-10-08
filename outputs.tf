@@ -1,16 +1,19 @@
 output "id" {
   description = "The id of the user pool"
   value       = aws_cognito_user_pool.user_pool.id
+  senstive = true
 }
 
 output "arn" {
   description = "The ARN of the user pool"
   value       = aws_cognito_user_pool.user_pool.arn
+  senstive = true
 }
 
 output "endpoint" {
   description = "The endpoint name of the user pool. Example format: cognito-idp.REGION.amazonaws.com/xxxx_yyyyy"
   value       = aws_cognito_user_pool.user_pool.endpoint
+  senstive = true;
 }
 
 output "creation_date" {
