@@ -17,12 +17,12 @@ terraform {
   # }
 }
 
-  # data "terraform_remote_state" "state" {
-  # backend = "s3"
-  # config {
-  #  bucket         = "pmp-terraform-state-${var.environment}"
-  #   key            = "ccs-pmp-infra-idam"
-  #   region         = "eu-west-2"
-  #   dynamodb_table = "pmp_terraform_state_lock-${var.environment}"
-  #   encrypt        = true
-  # }
+# data "terraform_remote_state" "state" {
+# backend = "s3"
+# config {
+#  bucket         = "pmp-terraform-state-${var.environment}"
+#   key            = "ccs-pmp-infra-idam"
+#   region         = "eu-west-2"
+#   dynamodb_table = "pmp_terraform_state_lock-${var.environment}"
+#   encrypt        = true
+# }
