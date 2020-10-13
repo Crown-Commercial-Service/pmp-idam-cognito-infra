@@ -46,12 +46,12 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
-  email_configuration {
-    //reply_to_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
-    from_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
-    //email_source_arn = "arn:aws:ses:{region}:{account_id}:identity/noreply@printmarketplace.crowncommercial.gov.uk"
-    //EmailSendingAccount = "DEVELOPER"
-  }
+  # email_configuration {
+  #   //reply_to_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
+  #   from_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
+  #   //email_source_arn = "arn:aws:ses:{region}:{account_id}:identity/noreply@printmarketplace.crowncommercial.gov.uk"
+  #   //EmailSendingAccount = "DEVELOPER"
+  # }
 
   password_policy {
     minimum_length    = 10
