@@ -46,6 +46,13 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
+  email_configuration {
+    //reply_to_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
+    from_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
+    //email_source_arn = "arn:aws:ses:{region}:{account_id}:identity/noreply@printmarketplace.crowncommercial.gov.uk"
+    EmailSendingAccount = "DEVELOPER"
+  }
+
   password_policy {
     minimum_length    = 10
     require_lowercase = true
@@ -77,7 +84,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   }
 
   schema {
-    name                = "given_name"
+    name                = "name"
     attribute_data_type = "String"
     mutable             = true
     required            = true
@@ -87,6 +94,19 @@ resource "aws_cognito_user_pool" "user_pool" {
       max_length = 256
     }
   }
+
+ schema {
+    name                = "family_name"
+    attribute_data_type = "String"
+    mutable             = true
+    required            = true
+
+    string_attribute_constraints {
+      min_length = 3
+      max_length = 256
+    }
+  }
+
 
   # schema {
   #   name                = "phone_number"
