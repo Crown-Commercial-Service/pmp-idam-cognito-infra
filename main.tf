@@ -167,7 +167,7 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
 resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   name                                 = "pmp_client_ccs-${var.env_var}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
-  refresh_token_validity               = 1
+  refresh_token_validity               = 5
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
