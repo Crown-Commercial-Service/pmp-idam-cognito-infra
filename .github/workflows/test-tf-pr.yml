@@ -37,7 +37,7 @@ jobs:
       run: terraform validate
 
     - name: Terraform Plan
-      run: terraform plan -var 'env_var=test'
+      run: terraform plan -var 'env_var=test' -var 'callbackurl=-uat'
       env:
         GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: '.'

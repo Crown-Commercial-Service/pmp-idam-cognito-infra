@@ -7,9 +7,9 @@
 #
 # ##############################################################
 
-# variable "region" {
-#   default = "eu-west-1"
-# }
+variable "env_region" {
+  default = "eu-west-2"
+}
 
 data "aws_caller_identity" "current" {}
 
@@ -18,6 +18,10 @@ data "aws_caller_identity" "current" {}
 # }
 
 variable "env_var" {
+  type    = string
+}
+
+variable "callbackurl" {
   type    = string
 }
 

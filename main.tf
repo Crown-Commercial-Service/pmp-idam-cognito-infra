@@ -46,6 +46,13 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
+  # email_configuration {
+  #   //reply_to_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
+  #   from_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
+  #   //email_source_arn = "arn:aws:ses:{region}:{account_id}:identity/noreply@printmarketplace.crowncommercial.gov.uk"
+  #   //EmailSendingAccount = "DEVELOPER"
+  # }
+
   password_policy {
     minimum_length    = 10
     require_lowercase = true
@@ -77,7 +84,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   }
 
   schema {
-    name                = "given_name"
+    name                = "name"
     attribute_data_type = "String"
     mutable             = true
     required            = true
@@ -87,6 +94,19 @@ resource "aws_cognito_user_pool" "user_pool" {
       max_length = 256
     }
   }
+
+ schema {
+    name                = "family_name"
+    attribute_data_type = "String"
+    mutable             = true
+    required            = true
+
+    string_attribute_constraints {
+      min_length = 3
+      max_length = 256
+    }
+  }
+
 
   # schema {
   #   name                = "phone_number"
@@ -135,7 +155,7 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth-${var.env_var}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+  callback_urls                        = ["https://auth${var.callbackurl}.print-marketplace.co.uk/auth/realms/PMP/broker/ccs/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
@@ -147,11 +167,11 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
 resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   name                                 = "pmp_client_ccs-${var.env_var}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
-  refresh_token_validity               = 1
+  refresh_token_validity               = 5
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth-${var.env_var}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+  callback_urls                        = ["https://auth${var.callbackurl}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
