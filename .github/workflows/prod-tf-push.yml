@@ -37,7 +37,7 @@ jobs:
       run: terraform validate
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve -var 'env_var=prod'
+      run: terraform apply -auto-approve -var 'env_var=prod' -var 'callbackurl='
       env:
         GITHUB_TOKEN: ${{ secrets.TF_GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: '.'
