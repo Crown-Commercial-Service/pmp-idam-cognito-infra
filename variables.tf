@@ -21,6 +21,10 @@ variable "env_var" {
   type    = string
 }
 
+variable "callbackurl" {
+  type    = string
+}
+
 variable "env" {
   type    = map
   default = {}
