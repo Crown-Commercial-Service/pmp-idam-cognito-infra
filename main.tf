@@ -32,7 +32,6 @@ resource "aws_cognito_user_pool" "user_pool" {
 
   username_attributes        = ["email"]
   auto_verified_attributes   = ["email"]
-  default_email_option  = "CONFIRM_WITH_CODE"
   email_verification_subject = "Crown Commercial Service Verification Code"
   email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
 
