@@ -33,7 +33,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   username_attributes        = ["email"]
   auto_verified_attributes   = ["email"]
   email_verification_subject = "Crown Commercial Service Verification Code"
-  email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
+  email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Please click the link below to verify your email address. {##Verify Email##}</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
 
 
   # User self-registration enabled, set to true to prevent self-registration.
@@ -95,7 +95,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
- schema {
+  schema {
     name                = "family_name"
     attribute_data_type = "String"
     mutable             = true
@@ -171,7 +171,7 @@ resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth${var.callbackurl}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+  callback_urls                        = ["https://auth-${var.env_var}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]

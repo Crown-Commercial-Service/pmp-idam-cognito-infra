@@ -18,11 +18,11 @@ data "aws_caller_identity" "current" {}
 # }
 
 variable "env_var" {
-  type    = string
+  type = string
 }
 
 variable "callbackurl" {
-  type    = string
+  type = string
 }
 
 variable "env" {
