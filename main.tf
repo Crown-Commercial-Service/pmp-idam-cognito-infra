@@ -30,11 +30,16 @@ resource "aws_cognito_user_pool" "user_pool" {
   # enable_username_case_sensitivity = false
   # advanced_security_mode           = "ENFORCED"
 
-  username_attributes        = ["email"]
-  auto_verified_attributes   = ["email"]
-  email_verification_subject = "Crown Commercial Service Verification Code"
-  email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Please click the link below to verify your email address. {##Verify Email##}</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
+  username_attributes      = ["email"]
+  auto_verified_attributes = ["email"]
+  //email_verification_subject = "Crown Commercial Service Verification Code"
+  //email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Please click the link below to verify your email address. {##Verify Email##}</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
 
+  verification_message_template {
+    default_email_option  = "CONFIRM_WITH_LINK"
+    email_subject_by_link = "Crown Commercial Service - Account Verification"
+    email_message_by_link = "<p>Hello,</p><p>Thanks for signing up!</p><p>Please click the link to verify your email address: <strong>{##VERIFY EMAIL##}</strong></p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
+  }
 
   # User self-registration enabled, set to true to prevent self-registration.
   admin_create_user_config {
