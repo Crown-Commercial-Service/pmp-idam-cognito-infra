@@ -36,7 +36,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   //email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Please click the link below to verify your email address. {##Verify Email##}</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
 
     email_subject_by_link = "Crown Commercial Service - Account Verification"
-    email_message_by_link = "<p>Hello,</p>\n<br><br>\n<p>Thanks for signing up!</p>\n<br><br>\n<p>Please click the link to verify your email address: <strong>{##VERIFY EMAIL##}</strong></p>\n<br><br>\n<p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
+    email_message_by_link = "<p>Hello,</p><p>Thanks for signing up!</p><p>Please click the link to verify your email address: <strong>{##VERIFY EMAIL##}</strong></p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
     default_email_option = "CONFIRM_WITH_LINK"
 
   # User self-registration enabled, set to true to prevent self-registration.
