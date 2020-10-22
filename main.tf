@@ -95,7 +95,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
- schema {
+  schema {
     name                = "family_name"
     attribute_data_type = "String"
     mutable             = true
