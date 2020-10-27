@@ -32,7 +32,8 @@ resource "aws_cognito_user_pool" "user_pool" {
 
   username_attributes        = ["email"]
   auto_verified_attributes   = ["email"]
-  email_verification_subject = "Crown Commercial Service Verification Code"
+  # default_email_option  = "CONFIRM_WITH_LINK"
+  email_verification_subject = "Print Marketplace verification code"
   email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
 
 
@@ -95,7 +96,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
- schema {
+  schema {
     name                = "family_name"
     attribute_data_type = "String"
     mutable             = true
@@ -151,7 +152,7 @@ resource "aws_cognito_user_group" "pmp_user_pool_groups" {
 resource "aws_cognito_user_pool_client" "pmp_client" {
   name                                 = "pmp_client-${var.env_var}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
-  refresh_token_validity               = 1
+  refresh_token_validity               = 5
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
