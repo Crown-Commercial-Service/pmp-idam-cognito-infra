@@ -91,7 +91,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     required            = true
 
     string_attribute_constraints {
-      min_length = 3
+      min_length = 2
       max_length = 256
     }
   }
@@ -103,7 +103,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     required            = true
 
     string_attribute_constraints {
-      min_length = 3
+      min_length = 2
       max_length = 256
     }
   }
