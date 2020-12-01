@@ -74,7 +74,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   schema {
     attribute_data_type      = "String"
     developer_only_attribute = false
-    mutable                  = true
+    mutable                  = false
     name                     = "email"
     required                 = true
 
@@ -87,7 +87,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   schema {
     name                = "name"
     attribute_data_type = "String"
-    mutable             = true
+    mutable             = false
     required            = true
 
     string_attribute_constraints {
@@ -99,7 +99,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   schema {
     name                = "family_name"
     attribute_data_type = "String"
-    mutable             = true
+    mutable             = false
     required            = true
 
     string_attribute_constraints {
