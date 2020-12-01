@@ -58,7 +58,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     minimum_length    = 10
     require_lowercase = true
     require_numbers   = true
-    require_symbols   = true
+    require_symbols   = false
     require_uppercase = true
 
     //temporary_password_validity_days = 3
@@ -91,7 +91,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     required            = true
 
     string_attribute_constraints {
-      min_length = 3
+      min_length = 2
       max_length = 256
     }
   }
@@ -103,7 +103,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     required            = true
 
     string_attribute_constraints {
-      min_length = 3
+      min_length = 2
       max_length = 256
     }
   }
