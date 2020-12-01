@@ -58,7 +58,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     minimum_length    = 10
     require_lowercase = true
     require_numbers   = true
-    require_symbols   = false
+    require_symbols   = true
     require_uppercase = true
 
     //temporary_password_validity_days = 3
@@ -74,7 +74,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   schema {
     attribute_data_type      = "String"
     developer_only_attribute = false
-    mutable                  = false
+    mutable                  = true
     name                     = "email"
     required                 = true
 
@@ -87,7 +87,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   schema {
     name                = "name"
     attribute_data_type = "String"
-    mutable             = false
+    mutable             = true
     required            = true
 
     string_attribute_constraints {
@@ -99,7 +99,7 @@ resource "aws_cognito_user_pool" "user_pool" {
   schema {
     name                = "family_name"
     attribute_data_type = "String"
-    mutable             = false
+    mutable             = true
     required            = true
 
     string_attribute_constraints {
