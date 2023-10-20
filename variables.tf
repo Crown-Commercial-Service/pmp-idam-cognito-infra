@@ -26,7 +26,7 @@ variable "callbackurl" {
 }
 
 variable "env" {
-  type    = map
+  type    = map(any)
   default = {}
 }
 
@@ -46,7 +46,7 @@ variable "user_pool_name" {
 
 # adding groups
 variable "pmp_cognito_groups" {
-  type = map
+  type = map(any)
   default = {
     "customer"      = "Buyer user access",
     "CustomerAdmin" = "Customer Admin user access",

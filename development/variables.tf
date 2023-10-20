@@ -18,17 +18,17 @@ data "aws_caller_identity" "current" {}
 # }
 
 variable "env_var" {
-  type = string
+  type    = string
   default = "develop"
 }
 
 variable "cognito_callback_urls_pmp_client" {
-  type = list(string)
+  type    = list(string)
   default = ["https://auth-dev.print-marketplace.co.uk/auth/realms/PMP/broker/ccs/endpoint"]
 }
 
 variable "cognito_callback_urls_pmp_client_ccs" {
-  type = list(string)
+  type    = list(string)
   default = ["https://auth-dev.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
 }
 
@@ -48,7 +48,7 @@ variable "user_pool_name" {
 
 # adding groups
 variable "pmp_cognito_groups" {
-  type = map
+  type = map(any)
   default = {
     "customer"      = "Buyer user access",
     "CustomerAdmin" = "Customer Admin user access",
