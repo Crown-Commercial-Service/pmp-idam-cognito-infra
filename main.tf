@@ -1,43 +1,11 @@
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# DEPLOY A COGNITO USER POOL
-# This script deploys a Cognito User Pool with customized settings.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# ------------------------------------------------------------------------------
-# PROVIDER CONFIGURATION
-# ------------------------------------------------------------------------------
-
-# terraform {
-#   required_version = ">=0.12"
-# }
-
-# provider "aws" {
-#   version    = "~> 3.0"
-# #   access_key = local.db_creds.aws_access_key
-# #   secret_key = local.aws_secret_key
-#   region     = var.region
-# }
-
-##############################################################
-# Basic user pool using email verification. THe user name
-# must be an email address.
-##############################################################
 resource "aws_cognito_user_pool" "user_pool" {
   name = var.user_pool_name
 
-  # We allow the public to create user profiles
-  # allow_admin_create_user_only = false
-  # enable_username_case_sensitivity = false
-  # advanced_security_mode           = "ENFORCED"
-
   username_attributes        = ["email"]
   auto_verified_attributes   = ["email"]
-  # default_email_option  = "CONFIRM_WITH_LINK"
   email_verification_subject = "Print Marketplace verification code"
   email_verification_message = "<p>Hello,</p><p>Your Crown Commercial Service verification code is: <strong>{####}</strong></p><p>You must use this code within 24 hours of receiving this email.</p><p>Kind regards,<br>Customer Services Team<br>Crown Commercial Service</p>"
 
-
-  # User self-registration enabled, set to true to prevent self-registration.
   admin_create_user_config {
     allow_admin_create_user_only = false
     invite_message_template {
@@ -46,14 +14,6 @@ resource "aws_cognito_user_pool" "user_pool" {
       sms_message   = "Welcome to the Print Marketplace. Your username is {username} and temporary password is {####}"
     }
   }
-
-  # email_configuration {
-  #   //reply_to_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
-  #   from_email_address = "noreply@printmarketplace.crowncommercial.gov.uk"
-  #   //email_source_arn = "arn:aws:ses:{region}:{account_id}:identity/noreply@printmarketplace.crowncommercial.gov.uk"
-  #   //EmailSendingAccount = "DEVELOPER"
-  # }
-
   password_policy {
     minimum_length    = 10
     require_lowercase = true
@@ -61,7 +21,7 @@ resource "aws_cognito_user_pool" "user_pool" {
     require_symbols   = false
     require_uppercase = true
 
-    //temporary_password_validity_days = 3
+    temporary_password_validity_days = 7
   }
 
 
@@ -108,19 +68,6 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
-
-  # schema {
-  #   name                = "phone_number"
-  #   attribute_data_type = "String"
-  #   mutable             = true
-  #   required            = true
-
-  #   string_attribute_constraints {
-  #     min_length = 1
-  #     max_length = 2048
-  #   }
-  # }
-
   schema {
     attribute_data_type      = "String"
     developer_only_attribute = false
@@ -135,10 +82,6 @@ resource "aws_cognito_user_pool" "user_pool" {
   }
 }
 
-##############################################################
-# Create required user pool groups
-##############################################################
-
 resource "aws_cognito_user_group" "pmp_user_pool_groups" {
   count        = length(keys(var.pmp_cognito_groups))
   name         = element(keys(var.pmp_cognito_groups), count.index)
@@ -146,9 +89,6 @@ resource "aws_cognito_user_group" "pmp_user_pool_groups" {
   user_pool_id = aws_cognito_user_pool.user_pool.id
 }
 
-##############################################################
-# create user pool app client
-##############################################################
 resource "aws_cognito_user_pool_client" "pmp_client" {
   name                                 = "pmp_client-${var.env_var}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
@@ -156,15 +96,12 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth${var.callbackurl}.print-marketplace.co.uk/auth/realms/PMP/broker/ccs/endpoint"]
+  callback_urls                        = var.cognito_callback_urls_pmp_client
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
 }
 
-##############################################################
-# create user pool app client CCS
-##############################################################
 resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   name                                 = "pmp_client_ccs-${var.env_var}"
   user_pool_id                         = aws_cognito_user_pool.user_pool.id
@@ -172,16 +109,8 @@ resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   generate_secret                      = true
   allowed_oauth_flows_user_pool_client = true
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"]
-  callback_urls                        = ["https://auth${var.callbackurl}.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
+  callback_urls                        = var.cognito_callback_urls_pmp_client_ccs
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
 }
-
-##############################################################
-# Domain using the current AWS account ID
-##############################################################
-# resource "aws_cognito_user_pool_domain" "ccs_cmp_domain" {
-#   domain       = data.aws_caller_identity.current.account_id
-#   user_pool_id = aws_cognito_user_pool.user_pool.id
-# }
