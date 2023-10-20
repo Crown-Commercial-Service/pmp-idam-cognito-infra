@@ -5,16 +5,18 @@ variable "env_region" {
 data "aws_caller_identity" "current" {}
 
 variable "env_var" {
-  type = string
+  type    = string
+  default = "test"
 }
 
-variable "callbackurl" {
-  type = string
+variable "cognito_callback_urls_pmp_client" {
+  type    = list(string)
+  default = ["https://auth-uat.print-marketplace.co.uk/auth/realms/PMP/broker/ccs/endpoint"]
 }
 
-variable "env" {
-  type    = map(any)
-  default = {}
+variable "cognito_callback_urls_pmp_client_ccs" {
+  type    = list(string)
+  default = ["https://auth-uat.print-marketplace.co.uk/auth/realms/PMP/broker/keycloak-oidc/endpoint"]
 }
 
 variable "user_pool_name" {
