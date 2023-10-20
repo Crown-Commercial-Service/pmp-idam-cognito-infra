@@ -100,6 +100,13 @@ resource "aws_cognito_user_pool_client" "pmp_client" {
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
+
+  # Ignore lifecycle changes
+  lifecycle {
+    ignore_changes = [
+      generate_secret,
+    ]
+  }
 }
 
 resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
@@ -113,4 +120,11 @@ resource "aws_cognito_user_pool_client" "pmp_client_ccs" {
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
   supported_identity_providers         = ["COGNITO"]
+
+  # Ignore lifecycle changes
+  lifecycle {
+    ignore_changes = [
+      generate_secret,
+    ]
+  }
 }
